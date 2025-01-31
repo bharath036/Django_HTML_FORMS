@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block start %}
+    <div class = "container mt-5">
+        <h2 class = " text-center">Guess the lucky number</h2>
+        
+        <form action="#">
+
+        <div class = "form-group col-md-5 mx-auto">
+            <label>Hope you win!!</label>
+        <input class = "form-control mt-1" id = "check-btn" placeholder="Guess the number">
+
+    </div>
+
+    <div class = "text-center mt-4">
+    <button class = "btn btn-success" id="check-btn " type="button">Check now</button>
+</div>
+</form>
+    </div>
+
+    {{lucky_number}}
+
+
+
+<script>
+    console.log("JavaScript is working!");
+        var lucky_number = parseInt("{{lucky_number}}",10);
+        var count = 4;
+        console.log(lucky_number)
+        function checkLuck(){
+        console.log("Button clicked!");
+        alert("Button clicked!");
+        var input = document.getElementById('check-btn');
+        var guess = parseInt(input.value,10);
+
+        if(input.value == ""){alert("Input cannot be blank")}
+        count -= 1
+
+        if(count === 0)
+        {alert('You have exhausted')
+            return
+        }
+
+        
+
+
+        if(lucky_number === guess)
+        {alert("Wow!!You won");
+        window.location.reload();
+       
+        return; 
+        }
+        else if(lucky_number>guess){
+            alert("Sorry,your guess is small\n Try again ${count} times");
+             input.value = "";
+            return ;
+        }
+        else if(lucky_number<guess)
+        {alert("Sorry,your guess is big\n Try again ${count} times");
+         input.value = "";
+            return;
+        }
+    }
+    </script>
+  
+  {% endblock %}

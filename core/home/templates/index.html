@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class = "container p-4">
+
+
+ 
+    <h1>This HTML page is returned by DJANGO. :)</h1>
+    <p>Django is really nice.</p>
+    <h2>your lucky number is --> {{lucky_number}}</h2>
+    <ol>
+        {% for vegetable in vegetables %}
+        <li>{{vegetable}}</li>
+
+        {% endfor %}
+    </ol>
+<hr>
+    <p>
+    <a href = "{% url 'contact'%}" > Contact </a> |
+    <a href = "{%url 'about'%}" > About </a>
+</p>
+</div>
+
+{% endblock %}
