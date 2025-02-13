@@ -1,14 +1,35 @@
 {% extends "base.html" %}
 
 {% block start %}
-<body>
+
     <h1>This HTML page is returned by DJANGO. :)</h1>
     <p>Django is really nice.</p>
     <p>Contact page</p>
+
+<p>
     <a href = "{% url 'index'%}" >Home</a> |
     <a href = "{%url 'about'%}" > About </a>
 
-</body>
-</html>
+</p>
+
+<div class = "col-6 mx-auto">
+    <form method="POST" enctype = "multipart/form-data">
+        {{form.as_p}}
+        {% csrf_token %}
+    
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+
+<style>
+    input{
+        border: none !important
+    }
+    label{
+        font-weight: bold !important;
+    }
+</style>
+
 
 {% endblock %}

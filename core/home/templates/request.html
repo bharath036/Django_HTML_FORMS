@@ -1,0 +1,63 @@
+{% extends "base.html"%}
+
+{% block start %}
+<nav class="navbar navbar-expand-lg bg-primary shadow-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="col-6 mx-auto card shadow p-4 mt-5">
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+      </div>
+      {% endfor %}
+      {%endif%}
+
+
+<form METHOD = "POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Product Name</label>
+      <input type="text"
+      name = "product_name"
+      class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Quantity</label>
+      <input type="number" 
+    name = "quantity"  
+    class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Remarks</label>
+        <textarea
+        name = "remarks"
+        class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">File</label>
+        <input type="file" 
+      name = "file"  
+      class="form-control" id="file">
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div> 
+
+{% endblock %}
