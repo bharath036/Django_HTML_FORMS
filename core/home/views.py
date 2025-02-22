@@ -7,6 +7,16 @@ from home.models import Contact, Product
 from django.contrib import messages 
 # Create your views here.
 
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        print(f"Received Name: {name}")
+        Contact.objects.create(name=name)
+        return redirect('/contact')
+    contacts =  Contact.objects.all()
+    print(f"Contacts from DB: {contacts}") 
+    return render(request,'contact.html',{'contacts':contacts})
+
 def index(request):
     #print("request",vars(request))
     lucky_number = random.randint(10,99)
@@ -20,7 +30,7 @@ def index(request):
 
 def about(request):
     return render(request,"about.html")
-
+'''
 def contact(request):
     form = ContactForm()
     if request.method == "POST":
@@ -33,7 +43,7 @@ def contact(request):
     form = ContactForm()
     context = {'form': form}
     return render(request,"contact.html",context)
-
+'''
 def dynamic_url(request,id,name):
     print(f'This is the value that we got in function -->{id}')
     return render(request, 'dynamic_url.html', context = {"id":id , "name": name })
@@ -53,6 +63,13 @@ def request_product(request):
         remarks = request.POST.get('remarks')
         file = request.FILES['file']
 
+        #lets check what we get in data if we upload and push in backend
+        print(file)
+        #HERE WE CHECK THE extension of file and validate
+        if str(file).split('.')[1] != "pdf":
+            messages.warning(request,"Only Pdf files are allowed")
+            return redirect('/request-product/')
+        
         product = Product.objects.create(
             product_name = product_name,
             quantity = quantity,
